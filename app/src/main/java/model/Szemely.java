@@ -9,7 +9,16 @@ public class Szemely {
 	private SimpleStringProperty keresztnev;
 	private SimpleStringProperty szuletesidatum;
 	
-	public Szemely(String id, String vezeteknev, String keresztnev, String szuletesidatum) { //kicserélem a belsejét
+	public Szemely() 
+	{
+		this.id = new SimpleStringProperty();
+		this.vezeteknev = new SimpleStringProperty();
+		this.keresztnev = new SimpleStringProperty();
+		this.szuletesidatum = new SimpleStringProperty();
+	}
+	
+	public Szemely(String id, String vezeteknev, String keresztnev, String szuletesidatum) 
+	{ //kicserélem a belsejét
 		//super(); //örökléshez
 		this.id = new SimpleStringProperty(id);
 		this.vezeteknev = new SimpleStringProperty(vezeteknev);
