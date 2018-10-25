@@ -86,7 +86,7 @@ public class Main {
 				System.exit(0);
 				break;
 			default:
-				System.out.println("Nem létező menüpont!");
+				System.out.println(" - Nem létező menüpont!");
 				break;
 			}
 		}
