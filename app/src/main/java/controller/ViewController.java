@@ -74,22 +74,31 @@ public class ViewController implements Initializable{ //beírom hogy implements 
     @FXML
     void menuItemTorol(ActionEvent event) {
     	Szemely szemelyTorol = tabla.getSelectionModel().getSelectedItem();
-    	tablaAdatok.remove(szemelyTorol);
+    	db.remove(szemelyTorol);
+    	tablaFrissit();
     }
     
     @FXML
     void hozzadGomb(ActionEvent event) {
-    	Szemely szemelyAdd = new Szemely(idMezo.getText(), 
-    			VezNevMezo.getText(), 
-    			KerNevMezo.getText(), 
-    			SzulDatumMezo.getText());
+    	Szemely szemelyAdd = new Szemely();
+    	szemelyAdd.setId(idMezo.getText());
+    	szemelyAdd.setVezeteknev(VezNevMezo.getText());
+    	szemelyAdd.setKeresztnev(KerNevMezo.getText());
+    	szemelyAdd.setSzuletesidatum(SzulDatumMezo.getText());
+    	db.add(szemelyAdd);
+    	tablaFrissit();
+    }
+    
+    @FXML
+    void hozzadSzerkeszt(ActionEvent event) {
+    	Szemely szemelySzerkeszt = new Szemely();
+    	szemelySzerkeszt.setId(idMezo.getText());
+    	szemelySzerkeszt.setVezeteknev(VezNevMezo.getText());
+    	szemelySzerkeszt.setKeresztnev(KerNevMezo.getText());
+    	szemelySzerkeszt.setSzuletesidatum(SzulDatumMezo.getText());
+    	db.update(szemelySzerkeszt);
+    	tablaFrissit();
     	
-    	tablaAdatok.add(szemelyAdd);
-    	
-//    	System.out.println(idMezo.getText());
-//    	System.out.println(VezNevMezo.getText());
-//    	System.out.println(KerNevMezo.getText());
-//    	System.out.println(SzulDatumMezo.getText());
     }
     
     
@@ -100,6 +109,11 @@ public class ViewController implements Initializable{ //beírom hogy implements 
     	tablaKerNev.setCellValueFactory(cellData -> cellData.getValue().keresztnevProperty());
     	tablaSzulDatum.setCellValueFactory(cellData -> cellData.getValue().szuletesidatumProperty());
     	
+    	tabla.setItems(tablaAdatok);
+    }
+    
+    private void tablaFrissit() {
+    	tablaAdatok = db.get();
     	tabla.setItems(tablaAdatok);
     }
 
